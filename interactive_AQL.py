@@ -24,12 +24,16 @@ if __name__ == "__main__":
             break
         commandArr = command.split()
 
-        if commandArr[0].lower() == "create" and commandArr[1].lower() == "table":
-            currDB.set_table(commandArr[2])
-            default_features = input("Creating a table will use the default AQL features. Please confirm the action (y/n) \n")
-            if (default_features == "y"):
-                currDB.set_features(aql_features.all_features())
-                print(currDB.create_table())
+        if commandArr[0].lower() == "create":
+            if commandArr[1].lower() == "table":
+                currDB.set_table(commandArr[2])
+                default_features = input("Creating a table will use the default AQL features. Please confirm the action (y/n) \n")
+                if (default_features == "y"):
+                    currDB.set_features(aql_features.all_features())
+                    print(currDB.create_table())
+            elif commandArr[1].lower() == "database":
+                currDB = AQL(database)
+                print(currDB.create_database())
         elif commandArr[0].lower() == "insert":
             if commandArr[1].lower == "batch":
                 currDB.set_table(commandArr[3])
@@ -41,6 +45,8 @@ if __name__ == "__main__":
                 print(currDB.insert(filepath))
         elif commandArr[0].lower() == "select":
             print(currDB.select(command))
+        elif commandArr[0].lower == "use":
+            currDB = AQL(commandArr[1])
         else: 
             print("Command not found. Please check ReadMe for additional information.")
 
