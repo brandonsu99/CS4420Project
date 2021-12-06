@@ -69,8 +69,7 @@ def classify_audio(filePath):
     spectrogram_tensor = torchaudio.transforms.Spectrogram()(waveform)
 
     # fig = plt.figure()
-    filename = os.pat
-    h.basename(filePath)
+    filename = os.path.basename(filePath)
     plt.imsave(f'./data/spectrograms/yes/{filename}.png', spectrogram_tensor.log2()[0,:,:].numpy(), cmap='gray')
     
     file_image = datasets.ImageFolder(

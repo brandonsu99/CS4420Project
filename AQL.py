@@ -36,9 +36,6 @@ class AQL:
         except Exception as e:
             print(e)
 
-
-
-
     def insert(self, filepath):
         con = sqlite3.connect(self.database)
         cur = con.cursor()
