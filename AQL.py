@@ -20,6 +20,15 @@ class AQL:
         self.database = database
         self.table = table
         self.features = features
+    
+    def __init__(self, database):
+        self.database = database
+    
+    def set_table(self, table):
+        self.table = table
+    
+    def set_features(self, features):
+        self.features = features
 
     def create_table(self):
         con = sqlite3.connect(self.database)
