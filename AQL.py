@@ -12,6 +12,7 @@ import torch.nn.functional as F
 from torchvision import transforms, datasets 
 from PIL import Image
 import aql_features
+from pprint import pprint
 
 
 class AQL:
@@ -72,3 +73,12 @@ class AQL:
             f = os.path.join(filepath, filename)
             if os.path.isfile(f):
                 self.insert(f)
+
+    def select(self, query):
+        con = sqlite3.connect(self.database)
+        cur = con.cursor()
+        cur.execute(query)
+        res = cur.fetchall()
+        con.commit()
+        con.close()
+        pprint(res)
