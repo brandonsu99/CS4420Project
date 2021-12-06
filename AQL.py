@@ -16,10 +16,35 @@ from pprint import pprint
 
 
 class AQL:
+    #use case: all information passed in by user
     def __init__(self, database, table, features):
         self.database = database
         self.table = table
         self.features = features
+    
+    #use case: new database - not set up yet, so no relevant tables or features
+    def __init__(self, database):
+        self.database = database
+
+    #use case: accessing database and creating a table with default features
+    def __init__(self, database, table):
+        self.database = database
+        self.table = table
+        self.features = aql_features.all_features()
+    
+    #use case: need to set new table to create or access different table
+    def set_table(self, table):
+        self.table = table
+    
+    def set_features(self, features):
+        self.features = features
+
+    def create_database(self):
+        try: 
+            con = sqlite3.connect(self.database)
+            print("Success!")
+        except Exception as e:
+            print(e)
 
     def create_table(self):
         con = sqlite3.connect(self.database)
@@ -35,9 +60,6 @@ class AQL:
             print("Success!")
         except Exception as e:
             print(e)
-
-
-
 
     def insert(self, filepath):
         con = sqlite3.connect(self.database)
